@@ -1,0 +1,295 @@
+<!doctype html><html lang="zh-Hant"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="以白話、研究卡及互動例子理解四篇日曆價差相關文獻：研究發現、獲利機制與證據限制。"><title>讀懂日曆價差｜期權研究室</title><style>
+:root{--ink:#20382f;--muted:#62716a;--paper:#f5f4ed;--line:#d9dfd4;--accent:#b9d66b}*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:90px}body{margin:0;background:var(--paper);color:var(--ink);font:17px/1.9 system-ui,-apple-system,"Noto Sans TC",sans-serif}a{color:inherit;text-underline-offset:5px}header{position:sticky;top:0;background:#f5f4edf5;backdrop-filter:blur(12px);border-bottom:1px solid var(--line);z-index:5;padding:15px 5%;display:flex;justify-content:space-between;gap:20px;align-items:center}header strong{font-size:16px}nav{display:flex;gap:22px;font-size:14px}nav a{text-decoration:none}main{max-width:1120px;margin:auto;padding:0 28px}section{padding:72px 0;border-bottom:1px solid var(--line)}.eyebrow{font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--muted)}h1{font-size:clamp(38px,6vw,76px);line-height:1.25;letter-spacing:-2px;font-weight:650;margin:22px 0}h2{font-size:clamp(27px,4vw,39px);line-height:1.4;margin:12px 0 24px}h3{font-size:21px;margin:26px 0 10px}p{margin:12px 0}.lead{font-size:21px;max-width:750px;color:#52665b}.hero{display:grid;grid-template-columns:1.5fr 1fr;gap:48px;align-items:center;padding:75px 0}.hero-art{background:var(--ink);border-radius:6px;padding:32px;color:#f2f4e9;position:relative}.hero-art .number{font-size:70px;line-height:1.4;color:var(--accent)}.track{height:7px;border-radius:8px;background:#6a7a68;margin:15px 0 30px}.track.far{background:var(--accent);width:100%}.track.near{width:48%}.small{font-size:14px;color:var(--muted)}.hero-art .small{color:#c3cebd}.pill{display:inline-block;border:1px solid var(--line);border-radius:30px;padding:3px 12px;font-size:13px;margin:4px 5px 4px 0}.pill.dark{background:var(--ink);color:white}.grid{display:grid;grid-template-columns:1fr 1fr;gap:22px}.box{padding:26px;background:white;border:1px solid var(--line);border-radius:6px}.note{padding:19px 23px;border-left:4px solid #7c9b43;background:#eaf0df;margin:22px 0}.caution{background:#f4ead7;border-color:#bc9247}.toc{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin:28px 0}.toc a{padding:20px;background:#e8ecdf;text-decoration:none;border-radius:5px;font-size:16px}.toc span{display:block;font-size:12px;color:var(--muted)}.paper{position:relative}.paper-title{max-width:850px}.subtitle{color:var(--muted);font-size:15px}.big-quote{font-size:24px;font-weight:550;border-left:3px solid var(--ink);padding:12px 23px;margin:28px 0}.table-wrap{overflow:auto}table{border-collapse:collapse;width:100%;font-size:15px}th,td{padding:15px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}th{background:#e9edde}details{border:1px solid var(--line);padding:17px 22px;background:#fff;margin:14px 0;border-radius:4px}summary{cursor:pointer;font-weight:600}details p{font-size:16px}label{display:block;margin:14px 0 6px}input[type=range]{width:100%;accent-color:#466b3e}output{font-weight:700;font-variant-numeric:tabular-nums}.result{font-size:32px;line-height:1.5;color:var(--ink)}button{font:inherit;cursor:pointer;border:1px solid var(--ink);background:transparent;color:var(--ink);padding:8px 16px;border-radius:5px}button:hover{background:#e7eddd}button:focus-visible,a:focus-visible,summary:focus-visible{outline:3px solid #8aa44c;outline-offset:4px}.steps{counter-reset:step}.step{padding:18px 0 18px 55px;position:relative;border-bottom:1px solid var(--line)}.step:before{counter-increment:step;content:counter(step,decimal-leading-zero);position:absolute;left:0;font-size:22px;color:#7d925e}footer{padding:35px 0 60px;font-size:14px;color:var(--muted)}.sources li{margin:18px 0;overflow-wrap:anywhere}.glossary dt{font-weight:700;margin-top:18px}.glossary dd{margin:4px 0 16px;color:var(--muted)}@media(max-width:760px){header{align-items:flex-start;padding:12px 20px;flex-direction:column;gap:4px}nav{gap:17px;flex-wrap:wrap}main{padding:0 20px}.hero,.grid{grid-template-columns:1fr}.hero{gap:25px;padding:42px 0}.hero-art{padding:25px}.toc{grid-template-columns:1fr 1fr}section{padding:45px 0}.box{padding:20px}h1{letter-spacing:-1px}body{font-size:16px}}@media print{header,button,input{display:none}body{background:white;color:black;font-size:11pt}section{padding:20px 0;break-inside:auto}.hero{padding:10px 0}.hero-art{background:#eee;color:black}.grid{display:block}.box{margin-bottom:10px}details{break-inside:avoid}a{overflow-wrap:anywhere}}
+
+.js .reveal{opacity:0;transform:translateY(22px);transition:opacity .7s ease,transform .7s ease}.js .reveal.in{opacity:1;transform:none}
+.viz{background:#fff;border:1px solid var(--line);border-radius:10px;padding:22px 24px;margin:26px 0;box-shadow:0 6px 24px #20382f10}
+.viz h3{margin-top:0;display:flex;gap:10px;align-items:center}.viz h3 .tag{font-size:12px;font-weight:600;background:var(--accent);color:var(--ink);padding:2px 10px;border-radius:20px;letter-spacing:1px}
+.viz svg{width:100%;height:auto;display:block;overflow:visible}.viz svg text{font:12px system-ui,"Noto Sans TC",sans-serif;fill:#51655a}
+.viz .ctrls{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:4px 26px;margin-top:10px}.viz label{margin:10px 0 2px;font-size:15px}
+.viz .btnrow{display:flex;flex-wrap:wrap;gap:10px;margin:14px 0 4px}.viz button.on{background:var(--ink);color:#fff}.viz button.primary{background:var(--ink);color:#fff}.viz button.primary:hover{background:#34574a}
+.readout{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px;margin:14px 0}.readout div{background:#f1f4e8;border-radius:8px;padding:10px 14px;font-size:13px;color:var(--muted);line-height:1.5}.readout b{display:block;font-size:24px;color:var(--ink);font-variant-numeric:tabular-nums}.pos{color:#2f7d3a!important}.neg{color:#b5412f!important}
+.say{background:#eaf0df;border-left:4px solid #7c9b43;padding:12px 18px;border-radius:0 8px 8px 0;font-size:16px;min-height:3.4em;line-height:1.7}
+.story{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin:26px 0}.story .card{background:#fff;border:1px solid var(--line);border-radius:10px;padding:16px;text-align:center;position:relative}.story .card svg{width:100%;height:90px}.story .card b{display:block;margin-top:6px}.story .card p{font-size:14px;color:var(--muted);margin:4px 0;line-height:1.6}.story .num{position:absolute;top:8px;left:12px;font-size:13px;color:#7d925e;font-weight:700}
+.story .card:not(:last-child):after{content:"→";position:absolute;right:-14px;top:38px;color:#7d925e;font-size:20px;z-index:2}
+.anal{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:20px 0}.anal .c{background:#f4f1e4;border-radius:10px;padding:16px;text-align:center}.anal .e{font-size:44px;line-height:1.3}.anal .bar{height:14px;border-radius:8px;background:#b5412f;margin:8px auto 4px;transition:width .6s}
+.hero-art svg{width:100%;height:auto;margin-top:6px}
+@keyframes drain1{0%{transform:scaleX(1)}60%,100%{transform:scaleX(.02)}}@keyframes drain2{0%{transform:scaleX(1)}60%,100%{transform:scaleX(.5)}}
+.hero-art .track{transform-origin:left;animation:drain1 7s ease-in-out infinite}.hero-art .track.far{animation:drain2 7s ease-in-out infinite}
+@keyframes drawln{from{stroke-dashoffset:400}to{stroke-dashoffset:0}}.tent{stroke-dasharray:400;animation:drawln 3.5s ease-out infinite alternate}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}.bob{animation:bob 2.4s ease-in-out infinite}
+.quiz .q{background:#fff;border:1px solid var(--line);border-radius:10px;padding:18px 22px;margin:16px 0}.quiz .opts{display:grid;gap:8px;margin-top:10px}.quiz .opts button{text-align:left;padding:10px 14px}.quiz .opts button.right{background:#dcefd0;border-color:#5a9a3f}.quiz .opts button.wrong{background:#f6dcd4;border-color:#b5412f}.quiz .fb{font-size:15px;margin-top:8px;color:var(--muted)}
+.score{font-size:20px;font-weight:700}
+@media(max-width:760px){.story{grid-template-columns:1fr 1fr}.story .card:after{display:none}.anal{grid-template-columns:1fr}.viz{padding:16px}}
+@media(prefers-reduced-motion:reduce){.js .reveal{opacity:1;transform:none;transition:none}.hero-art .track,.tent,.bob{animation:none}html{scroll-behavior:auto}}
+@media print{.js .reveal{opacity:1;transform:none}.viz{box-shadow:none;break-inside:avoid}.viz .ctrls,.viz .btnrow{display:none}}
+</style></head><body><header><strong>◒ 日曆價差期權研究室</strong><nav aria-label="主要導覽"><a href="#basics">先懂原理</a><a href="#visual">圖解原理</a><a href="#papers">讀四篇研究</a><a href="#lab">互動試算</a><a href="#plan">研究路線</a><a href="#quiz">小測驗</a><a href="#sources">來源</a></nav></header><main>
+<div class="hero"><div><div class="eyebrow">Research notes · 01 / 文獻解說</div><h1>賣出近期，<br>買入遠期。<br>優勢在哪裏？</h1><p class="lead">用四篇研究，拆開日曆價差背後的邏輯。從「為甚麼可能賺錢」，走到「我們還需要驗證甚麼」。這一版加入動畫圖解和 6 個可以動手玩的互動圖。</p><p><span class="pill">繁體中文・白話導讀</span><span class="pill">研究與示例分開</span><span class="pill">2026.11.04 更新</span></p><a href="#basics">由最基本開始讀 ↓</a></div><div class="hero-art" aria-label="賣近期期權與買遠期期權的時間示意"><div class="small">同一標的 · 同一行使價 · 1 : 1</div><div class="number">時間差</div><div>− 賣出近期期權（30 天）</div><div class="track near"></div><div>＋ 買入遠期期權（60 天）</div><div class="track far"></div>
+<svg viewBox="0 0 300 110" aria-hidden="true"><line x1="10" y1="90" x2="290" y2="90" stroke="#6a7a68"/><path class="tent" d="M10 88 L110 80 L150 22 L190 80 L290 88" fill="none" stroke="#b9d66b" stroke-width="3" stroke-linejoin="round"/><circle class="bob" cx="150" cy="22" r="6" fill="#b9d66b"/><text x="150" y="106" text-anchor="middle" fill="#c3cebd" style="fill:#c3cebd">股價停在行使價附近＝最甜蜜點</text></svg>
+<p class="small">兩份合約的時間同時在流逝，但速度不同。<br>近的流失得快，遠的流失得慢。</p></div></div>
+<div class="note">閱讀提示：這是文獻教學網頁，未進行本研究室回測。文中的小例子是自行設計的教學數字，不是論文績效，也不是交易訊號。</div>
+<section id="basics"><div class="eyebrow">Start here</div><h2>先把一組交易拆開看</h2><p>假設股價是 100，你賣出 30 天後到期、行使價 100 的認購期權（Call），同時買入 60 天後到期、行使價也是 100 的 Call。前者叫「近腿」，後者叫「遠腿」。這裏研究兩腿一起平倉；留下遠腿，是另一種策略。</p><div class="grid"><div class="box"><h3>近腿：你收錢，也承擔責任</h3><p>你收取權利金。之後若這份期權變便宜，你可用較少的錢買回，賺取差額。但股價急升或市場更擔心短期波動，都可能令買回成本增加。</p></div><div class="box"><h3>遠腿：你付錢，買較長的權利</h3><p>較長期限通常有更多時間價值。它可能緩衝部分風險，但也會隨時間流逝或遠期波動預期下降而貶值；保護並非免費。</p></div></div><h3>一個可以逐項核算的例子</h3><p>入場買遠腿付 5、賣近腿收 3，淨支出是 2。後來遠腿值 4、近腿值 1，整組平倉收回 3，毛利為 1。若兩腿合計的來回成本是 0.4，淨利只剩 0.6。數字以每單位報價表示，未乘合約乘數。</p><div class="big-quote">整組淨損益 ＝ 遠腿賣出價 − 近腿買回價 − 入場淨支出 − 交易成本</div><p>若近腿到期時股價離行使價很遠，或遠腿的剩餘時間價值大跌，整組便可能虧損。股價在行使價附近通常有利於這類基本結構，但「股價沒動」仍不保證獲利。</p><details><summary>波動率、時間值流失：到底是甚麼？</summary><p><strong>隱含波動率（IV）</strong>是從期權價格反推出來的波動尺度，可以粗略想成「市場為不確定性開出的價碼」，不是未來波幅的保證。相同條件下，IV 越高，期權通常越貴。</p><p><strong>時間值流失</strong>是其他條件不變時，期權因剩餘時間減少而失去的價值。賣方可能受益，買方可能受損；但日曆價差同時有買有賣，不能只計近腿收了多少。</p><p><strong>期限結構</strong>是把不同到期期限的 IV 排在一起。它讓我們問：「市場現在為短期和長期的不確定性，各付多少錢？」</p></details><details><summary>還有甚麼風險需要知道？</summary><p>個股跳空、財報、除息、兩腿報價不同步及買賣差價都會改變結果。美式期權的近腿可能被提前指派，產生股票部位與資金需求；到期交收也須按合約規則處理。遠腿仍存在，不代表指派與交收會自動替你處理妥當。認購與認沽期權也應分開研究。</p></details></section>
+<section id="visual"><div class="eyebrow">See it move</div><h2>先用圖看懂：為甚麼「賣近買遠」有機會賺錢？</h2>
+<p>文字解釋之前，先看一個四格故事，再自己拉動滑桿。下面所有圖都用同一個教學例子：股價 100、行使價 100、近腿 30 天、遠腿 60 天。</p>
+<div class="story reveal">
+<div class="card"><span class="num">①</span><svg viewBox="0 0 120 90"><rect x="10" y="50" width="42" height="24" rx="4" fill="#b5412f" opacity=".85"/><text x="31" y="66" text-anchor="middle" style="fill:#fff;font-size:11px">收 3</text><rect x="68" y="30" width="42" height="44" rx="4" fill="#466b3e"/><text x="89" y="56" text-anchor="middle" style="fill:#fff;font-size:11px">付 5</text><text x="31" y="86" text-anchor="middle">賣近</text><text x="89" y="86" text-anchor="middle">買遠</text></svg><b>建倉</b><p>賣近腿收 3、買遠腿付 5，淨支出 2。</p></div>
+<div class="card"><span class="num">②</span><svg viewBox="0 0 120 90"><path d="M20 15h30l-15 25 15 25H20l15-25z" fill="#e7d9a8" stroke="#8a7a3f"/><path d="M70 15h30L85 40l15 25H70" fill="#e7d9a8" stroke="#8a7a3f"/><rect x="26" y="52" width="18" height="11" fill="#b5412f"/><rect x="76" y="24" width="18" height="16" fill="#466b3e"/><text x="35" y="82" text-anchor="middle">近：快流盡</text><text x="85" y="82" text-anchor="middle">遠：慢流</text></svg><b>時間流逝</b><p>近腿價值掉得快（對賣方有利），遠腿掉得慢。</p></div>
+<div class="card"><span class="num">③</span><svg viewBox="0 0 120 90"><line x1="5" y1="45" x2="115" y2="45" stroke="#999" stroke-dasharray="4"/><path d="M5 70 L30 50 L50 58 L75 40 L100 45 L115 45" fill="none" stroke="#466b3e" stroke-width="2.5"/><circle cx="100" cy="45" r="5" fill="#b9d66b" stroke="#466b3e"/><text x="12" y="40">行使價</text><text x="60" y="84" text-anchor="middle">股價回到附近</text></svg><b>股價靠近行使價</b><p>近腿快失效，遠腿仍有價值，價差擴闊。</p></div>
+<div class="card"><span class="num">④</span><svg viewBox="0 0 120 90"><circle cx="35" cy="42" r="20" fill="#dcefd0" stroke="#5a9a3f"/><text x="35" y="47" text-anchor="middle" style="font-size:13px">0</text><rect x="68" y="22" width="44" height="40" rx="5" fill="#466b3e"/><text x="90" y="46" text-anchor="middle" style="fill:#fff">仍有價值</text><text x="35" y="82" text-anchor="middle">近腿到期</text><text x="90" y="82" text-anchor="middle">遠腿剩餘</text></svg><b>近腿到期</b><p>近腿歸零，遠腿仍有剩餘價值，可平倉。</p></div>
+</div>
+
+<div class="viz reveal" id="vizA"><h3><span class="tag">互動 1</span>損益山丘：股價去哪裏，決定賺還是虧</h3>
+<p class="small">橫軸是「股價」，縱軸是「整組交易的損益」（未計交易成本）。拉動「過了幾天」，看山丘怎樣長出來；再拉動股價、波動率，看哪個因素令你受傷。</p>
+<svg id="a-svg" viewBox="0 0 640 330" role="img" aria-label="日曆價差損益曲線"></svg>
+<div class="ctrls">
+<div><label for="a-day">過了幾天：<output id="a-dayv">0</output> 天（近腿 30 天到期）</label><input id="a-day" type="range" min="0" max="30" step="1" value="30"></div>
+<div><label for="a-s">股價：<output id="a-sv">100</output></label><input id="a-s" type="range" min="80" max="120" step="0.5" value="100"></div>
+<div><label for="a-ni">近腿 IV 變動：<output id="a-niv">0</output> 點</label><input id="a-ni" type="range" min="-10" max="20" step="1" value="0"></div>
+<div><label for="a-fi">遠腿 IV 變動：<output id="a-fiv">0</output> 點</label><input id="a-fi" type="range" min="-15" max="10" step="1" value="0"></div></div>
+<div class="btnrow"><button type="button" class="primary" id="a-play">▶ 播放時間流逝</button><button type="button" id="a-reset">重設</button><button type="button" id="a-shock1">試試：事件後遠腿 IV 大跌</button><button type="button" id="a-shock2">試試：近腿 IV 急升</button></div>
+<div class="readout" aria-live="polite"><div>近腿（賣出）損益<b id="a-n">0</b></div><div>遠腿（買入）損益<b id="a-f">0</b></div><div>整組損益（未計成本）<b id="a-t">0</b></div><div>入場淨支出<b id="a-d">0</b></div></div>
+<div class="say" id="a-say"></div>
+<p class="small">教學模型：Black-Scholes 理論估值，無股息，利率 2%，入場 IV 近腿 30%、遠腿 28%。真實報價有買賣差價、波動率微笑與事件，理論曲線不是可成交價格。</p></div>
+
+<div class="viz reveal" id="vizB"><h3><span class="tag">互動 2</span>時間值流失：近腿掉得快，遠腿掉得慢</h3>
+<p class="small">股價不動的情況下，兩份「平價」期權的價值如何隨天數減少。綠色區域是兩者之差，也就是你持有的組合價值。</p>
+<svg id="b-svg" viewBox="0 0 640 280" role="img" aria-label="時間值流失曲線"></svg>
+<div class="ctrls"><div><label for="b-day">第 <output id="b-dayv">0</output> 天</label><input id="b-day" type="range" min="0" max="30" step="1" value="0"></div></div>
+<div class="btnrow"><button type="button" class="primary" id="b-play">▶ 播放</button></div>
+<div class="readout" aria-live="polite"><div>近腿價值<b id="b-n"></b></div><div>遠腿價值<b id="b-f"></b></div><div>價差（組合價值）<b id="b-s"></b></div><div>近腿已流失<b id="b-pn"></b></div><div>遠腿已流失<b id="b-pf"></b></div></div>
+<div class="say" id="b-say"></div>
+<p class="small">同樣是 IV 30% 的平價 Call。離到期越近，價值掉得越快，這就是賣近腿的收益來源；但別忘記遠腿也在掉。</p></div>
+</section>
+<section id="papers"><div class="eyebrow">The reading map</div><h2>四篇研究，回答四個不同問題</h2><p>它們並非四套已證實的賺錢法。有些研究直接測試日曆價差，有些只提供相關線索。</p><div class="toc"><a href="#paper1"><span>01 · 相對定價</span>短期和長期，要一起看</a><a href="#paper2"><span>02 · 訊號預測力</span>斜率能否幫忙選擇？</a><a href="#paper3"><span>03 · 直接策略實證</span>何時離場有差嗎？</a><a href="#paper4"><span>04 · 到期日曆</span>一個月不一定一樣長</a></div></section>
+<section class="paper" id="paper1"><div class="eyebrow">Paper 01 / Campasano & Linn · 2017 工作論文</div><h2>期限結構：不能只問 IV 高不高</h2><p class="subtitle paper-title">Understanding and Trading the Term Structure of Volatility</p><span class="pill">閱讀深度：既有筆記僅核對摘要索引</span><span class="pill">全文與交易細節待核實</span><h3>研究在問甚麼？</h3><p>不同到期期權的波動率，會怎樣一起變動？期限長短與當時的期限結構，是否共同影響之後的變化？</p><h3>目前確認到的意思</h3><p>依現有摘要筆記，波動率變動與期限、期限結構有交互關係。白話說，同樣是「IV 很高」，放在近期期權與遠期期權上，含意可能不同；只看單一月份的數字容易漏掉背景。</p><div class="note"><strong>教學比喻：</strong>比較酒店今晚和下月的房價。今晚昂貴可能因為附近有演唱會，不代表下月房價便宜，也不保證今晚的房價很快會跌。先知道「貴在哪段時間」，才能談相對價格。</div><h3>這對日曆價差有何啟發？</h3><p>我們賣近買遠，實際在持有兩段期限的相對價格。因此，候選訊號應同時記錄近腿 IV、遠腿 IV、相隔天數及事件位置，而非只設「IV 高就入場」。這是研究設計上的推論，尚未驗證。</p><div class="viz reveal" id="vizC"><h3><span class="tag">互動 3</span>期限結構：把兩個月份放在一起看</h3>
+<div class="anal"><div class="c"><div class="e">🎤🏨</div><b>今晚房價：$2,000</b><div class="bar" style="width:90%"></div><p class="small">附近有演唱會，貴有原因。</p></div><div class="c"><div class="e">🌙🏨</div><b>下個月房價：$900</b><div class="bar" style="width:40%;background:#466b3e"></div><p class="small">不能因為今晚貴，就說下月「便宜」。</p></div></div>
+<p class="small">用同樣的角度看期權：調整 30 天與 60 天的 IV，看「年化 IV」與「整段不確定性」如何不同。</p>
+<div class="btnrow"><button type="button" data-p="30,28">正常：近高遠低一點</button><button type="button" data-p="25,30">上斜（遠月較高）</button><button type="button" data-p="40,28">近月因財報偏高</button><button type="button" data-p="20,20">平坦</button></div>
+<svg id="c-svg" viewBox="0 0 640 260" role="img" aria-label="IV 期限結構"></svg>
+<div class="ctrls"><div><label for="c-n">30 天 IV：<output id="c-nv">30</output>%</label><input id="c-n" type="range" min="10" max="80" step="1" value="30"></div><div><label for="c-f">60 天 IV：<output id="c-fv">28</output>%</label><input id="c-f" type="range" min="10" max="80" step="1" value="28"></div></div>
+<div class="readout" aria-live="polite"><div>30 天總變異<b id="c-v1"></b></div><div>60 天總變異<b id="c-v2"></b></div><div>兩月份之間的遠期變異<b id="c-fv2"></b></div><div>隱含的遠期 IV<b id="c-fw"></b></div></div>
+<div class="say" id="c-say"></div>
+<p class="small">總變異＝IV² × 年數。這是簡化診斷，不是無模型結論，亦不是套利訊號。</p></div><details><summary>進一步理解：為甚麼近月 IV 高，不等於套利？</summary><p>IV 是年化尺度。30 天 IV 為 30%，60 天為 25%，不能直接把兩者相減當作可收取的利潤。簡化的總隱含變異數是 IV² × 年數：前者約 0.00740，後者約 0.01027。較低的年化 IV，仍可包含較大的整段不確定性。</p><p>用兩點相減再除以相隔年數，可估算介乎兩期限的遠期變異數；這只是簡化診斷。單一行使價的 IV 不是完整的無模型變異數，亦不是未來實際波幅的無偏預測。財報若在近腿到期前，兩腿都包含該事件，只是年化後的影響不同。</p></details><h3>證據邊界與我們的下一步</h3><p>全文本次仍受存取限制，尚未確認部位是否與本研究的同一行使價、1：1 結構相同，亦未核實成本、避險與回報分母。因此不展示網傳月回報、Sharpe 或固定 Forward Factor 入場門檻。下一步先取得全文，再判斷如何重現。</p><p><a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=2871616" target="_blank" rel="noopener">查看 SSRN 書目 ↗</a> · <a href="#sources">來源與閱讀紀錄</a></p></section>
+<section class="paper" id="paper2"><div class="eyebrow">Paper 02 / Aurelio Vasquez · 2017 · JFQA</div><h2>期限斜率：可能是選擇期權的線索</h2><p class="subtitle">Equity Volatility Term Structures and the Cross Section of Option Returns</p><span class="pill">閱讀深度：出版社摘要及書目</span><span class="pill">跨股票、跨式組合的相關證據</span><h3>研究在問甚麼？</h3><p>把不同股票按 IV 期限結構的斜率排序，能否區分之後的期權回報？「跨式」指同時持有認購和認沽期權，讓部位對兩個方向的價格變動都有反應。</p><h3>研究發現，以及它代表甚麼</h3><p>出版社摘要報告，高斜率股票的跨式組合，表現優於低斜率組合，且經不同設定與風險控制後仍見差異。這支持把期限斜率視為候選訊號；完整成本與訊號定義仍待核對全文。</p><div class="note"><strong>教學例子：</strong>假設 A、B 兩隻股票的近月 IV 都是 25%，遠月卻分別是 30% 和 22%。若只看近月，兩者一樣；加入期限結構，便看到不同背景。此例只說明資料多了一個維度，不代表應買 A 或賣 B。</div><div class="viz reveal" id="vizD"><h3><span class="tag">互動 4</span>期限斜率：把股票排隊，再切成兩組</h3>
+<p class="small">研究的做法是：按斜率（遠期 IV − 近期 IV）把股票排序，比較高斜率組和低斜率組之後的回報。拖動分界線，看股票怎樣被分組。下面八隻股票與數字都是<strong>虛構示意</strong>，不是論文資料。</p>
+<svg id="d-svg" viewBox="0 0 640 300" role="img" aria-label="股票按期限斜率分組"></svg>
+<div class="ctrls"><div><label for="d-cut">分界線（斜率）：<output id="d-cv">0</output> 點</label><input id="d-cut" type="range" min="-8" max="10" step="0.5" value="0"></div></div>
+<div class="say" id="d-say"></div></div><h3>最容易跨錯的一步</h3><p>原研究比較不同股票的跨式組合。我們要研究的是同一股票的兩個到期期權。即使一個訊號有預測力，買入遠腿的成本仍可能吃掉好處；交易結構不同，結論不能直接搬過來。</p><details><summary>為甚麼「斜率高」不能直接翻譯成入場規則？</summary><p>斜率可以定義為遠期 IV 減近期 IV，也可以用相反方向、期限標準化或迴歸估算。網頁不把任何一個自行定義冒充作者原式。重現前要先核對原論文的方向、到期配對、持有期及組合權重。</p><p>我們會分開測試：訊號能否預測近腿回報？能否預測遠腿回報？把兩腿組合後，扣成本是否仍改善結果？三個問題不能用同一個答案代替。</p></details><p><a href="https://www.cambridge.org/core/product/identifier/S002210901700076X/type/journal_article" target="_blank" rel="noopener">查看出版社原文入口 ↗</a></p></section>
+<section class="paper" id="paper3"><div class="eyebrow">Paper 03 / Slivka, Liang & Xue · 2020 · Indian Journal of Finance</div><h2>出場規則：有賺錢，仍未必更好</h2><p class="subtitle">An Empirical Study of Nifty 50 Option Time Spreads</p><span class="pill dark">直接研究日曆價差</span><span class="pill">既有研究紀錄：已讀全文</span><h3>研究實際做甚麼？</h3><p>依研究室既有全文筆記，研究使用 2015–2019 年 Nifty 50 收市資料，以接近現價的相同行使價 Call，賣最近月、買次近月。入場檢查股價不變假設下的估計回報是否高於融資成本，且近腿至少剩五天。</p><p>出場條件包含達到盈利門檻、價格離開估計盈虧平衡區，以及近腿到期前一個交易日離場。這比「一直等到到期」多了一套管理規則。</p><div class="grid"><div class="box"><h3>規則發展：2015–2018</h3><p>用這段資料形成規則。它可以幫忙找想法，但不能同時當作規則對未來有效的獨立證明。</p></div><div class="box"><h3>時間樣本外：2019</h3><p>這是唯一按時間留後測試的年份。依既有全文筆記，規則當年盈利，但不及持有至到期的日曆價差對照。</p></div></div><div class="viz reveal" id="vizE"><h3><span class="tag">互動 5</span>出場規則實驗室：管理，真的比放着更好嗎？</h3>
+<p class="small">隨機產生一條 30 天的股價路徑（沒有任何優勢），看日曆價差按規則提早離場，與一直放到近腿到期，結果有何不同。<strong>下面的規則數字是教學簡化，不是原論文數字。</strong></p>
+<svg id="e-svg" viewBox="0 0 640 400" role="img" aria-label="股價路徑與損益"></svg>
+<div class="ctrls"><div><label for="e-tp">止盈：賺到入場支出的 <output id="e-tpv">50</output>% 就走</label><input id="e-tp" type="range" min="10" max="150" step="5" value="50"></div><div><label for="e-bd">離場：股價離行使價超過 <output id="e-bdv">7</output>%</label><input id="e-bd" type="range" min="3" max="15" step="1" value="7"></div></div>
+<div class="btnrow"><button type="button" class="primary" id="e-new">🎲 抽一條新路徑</button><button type="button" id="e-batch">跑 300 條路徑比較</button></div>
+<div class="readout" aria-live="polite"><div>按規則離場<b id="e-m"></b></div><div>離場原因<b id="e-r" style="font-size:17px"></b></div><div>放到近腿到期<b id="e-h"></b></div></div>
+<div class="say" id="e-say"></div>
+<p class="small">模型：實際波動＝隱含波動 30%，IV 不變，未計成本與指派。在這種「沒有優勢」的世界，管理規則不會自動變好；要證明有用，必須用真實歷史資料及樣本外檢驗。</p></div><h3>這個結果最重要的含意</h3><p>「有盈利」回答的是有沒有賺錢；「優於對照」回答的是這套額外規則是否值得。更複雜的管理方法，需要證明它能改善回報、尾部虧損或資金使用，而非只展示正數。</p><div class="note caution">這裏的對照是日曆價差持有至到期，不是買入持有 Nifty 50 指數。本文不把原研究描述為「打敗大市」。</div><details><summary>重現前，有哪些地方要重新查清？</summary><p>既有筆記指出，表 6、表 7 與部分文字的績效描述有不一致，應逐格核對。文中列出費用，不代表兩腿買賣差價、報價同步與可成交性已充分處理。</p><p>若用整年結束後才知道的波動趨勢替該年分類，再回頭決定年內規則，便可能「偷看未來」。要另做只用入場當時資料的版本。這是待審核問題，不是此網頁已完成的偏差定案。</p><p>本次期刊連結重新取得全文逾時；本頁依既有全文閱讀紀錄整理，不宣稱本次已再次核對全部表格。</p></details><h3>怎樣加入我們的計劃？</h3><p>先重現原規則，再比較固定持有期、到期前離場與預先固定的止盈／止損。原設定和修正偏差後的設定分開報告；保留沒有效果的結果，不逐年挑最好看的門檻。</p><p><a href="https://indianjournalofentrepreneurship.com/index.php/IJF/article/download/154944/107467/0" target="_blank" rel="noopener">查看期刊全文 PDF ↗</a></p></section>
+<section class="paper" id="paper4"><div class="eyebrow">Paper 04 / Eisdorfer, Sadka & Zhdanov · 2022 · JFQA</div><h2>到期日曆：「一個月」可能差一星期</h2><p class="subtitle">Maturity Driven Mispricing of Options · 2021 線上刊登，2022 卷期</p><span class="pill">閱讀深度：出版社摘要及書目</span><span class="pill">到期天數的相關證據</span><h3>研究發現甚麼？</h3><p>在 1996–2017 年的資料中，兩次到期日相隔四週的月份，短期期權回報低於相隔五週的月份。作者提出，投資者沒有充分留意精確到期日，可能是解釋之一；這是作者的實證解釋，並非已排除所有其他可能。</p><h3>用最簡單的方式理解</h3><p>想像兩份都叫「月租」的合約，一份租 28 天，另一份租 35 天。名稱相同，實際時間卻多了四分之一。若人們只記得「一個月」，可能忽略每天付出的價格與承擔風險的時間。</p><div class="note">這個比喻只用來理解天數差異。期權價格不會必然隨天數按比例增加；股價、波動率、事件與非線性定價仍然重要。</div><div class="viz reveal" id="vizF"><h3><span class="tag">互動 6</span>一個月有多長？每月到期日的真實日曆</h3>
+<div class="anal"><div class="c"><div class="e">📅</div><b>28 天（四週）</b><div class="bar" style="width:80%;background:#466b3e"></div></div><div class="c"><div class="e">🗓️</div><b>35 天（五週）</b><div class="bar" style="width:100%"></div></div></div>
+<p class="small">以每月第三個星期五計算（標準月度期權常見到期日），相鄰兩個月的到期日相隔 28 或 35 天。點選年份，再點擊柱子查看。</p>
+<div class="btnrow" id="f-years"></div>
+<svg id="f-svg" viewBox="0 0 640 260" role="img" aria-label="每月到期日間隔"></svg>
+<div class="say" id="f-say"></div>
+<p class="small">簡化：只算第三個星期五，未處理假期提前到期的情況。</p></div><h3>對日曆價差的啟發</h3><p>如果只按「近月／次近月」配對，交易之間的實際時間長度可能不同。因此回測應記錄兩腿的精確剩餘天數與間隔，再控制假期和事件。否則，所謂期限結構優勢可能混入到期日曆差異。</p><details><summary>可以直接變成「四週賣、五週買」嗎？</summary><p>不可以直接推論。原摘要研究短期期權回報，不是同一標的賣近買遠的完整策略；買賣兩腿、持有期與成本都會改變結果。而且舊樣本的月度到期規律，不一定延伸至今日大量週期期權或港股合約。</p></details><p><a href="https://www.cambridge.org/core/journals/journal-of-financial-and-quantitative-analysis/article/maturity-driven-mispricing-of-options/991B7CE224B8CADCA7CB85AD7747B895" target="_blank" rel="noopener">查看出版社原文入口 ↗</a></p></section>
+<section id="lab"><div class="eyebrow">Try the mechanism</div><h2>動手改一改：近腿賺，不等於整組賺</h2><p>固定入場：買遠腿付 5、賣近腿收 3，淨支出 2。調整平倉報價，觀察每一部分的貢獻。這是報價算術教學，沒有估算真實期權價格；任意組合未必能在市場同時出現。</p><div class="grid"><div class="box"><label for="far">遠腿平倉賣出價：<output id="farValue" for="far">4.00</output></label><input id="far" type="range" min="0" max="10" step="0.1" value="4"><label for="near">近腿平倉買回價：<output id="nearValue" for="near">1.00</output></label><input id="near" type="range" min="0" max="10" step="0.1" value="1"><label for="cost">整組來回成本：<output id="costValue" for="cost">0.40</output></label><input id="cost" type="range" min="0" max="2" step="0.05" value="0.4"><button id="reset" type="button">重設例子</button></div><div class="box" aria-live="polite" aria-atomic="true"><div class="eyebrow">整組淨損益 / 每單位</div><p class="result" id="net">+0.60</p><p id="breakdown"></p><p id="lesson"></p><p class="small">未乘合約乘數。成本包含示意的佣金與成交摩擦，避免另重複計入相同差價。未模擬指派、交收或資金限制。</p></div></div><h3>事件在哪裏，影響就不同</h3><div class="table-wrap"><table><thead><tr><th>事件時間</th><th>兩腿包含甚麼？</th><th>應該怎樣解讀？</th></tr></thead><tbody><tr><td>近腿到期之前</td><td>兩腿都包含事件</td><td>同一次事件在短期限的年化 IV 影響可較大；近月較高不能單獨證明錯價。</td></tr><tr><td>兩腿到期之間</td><td>遠腿包含，近腿不包含</td><td>遠腿較貴可能有合理原因；遠腿事件後的波動率下降也可能造成損失。</td></tr><tr><td>遠腿到期之後</td><td>兩腿都不直接跨過事件</td><td>仍受其他消息與預期影響，不能視為零事件風險。</td></tr></tbody></table></div></section>
+<section id="compare"><div class="eyebrow">What the evidence can say</div><h2>把四篇放在一起，證據到哪一步？</h2><div class="table-wrap"><table><thead><tr><th>研究</th><th>能幫我們問</th><th>還不能說</th></tr></thead><tbody><tr><td>Campasano–Linn</td><td>期限與相對價格如何共同影響波動率變化？</td><td>某個固定門檻已適合本研究的 1：1 日曆價差。</td></tr><tr><td>Vasquez</td><td>期限斜率能否成為候選預測訊號？</td><td>跨式排序的優勢一定可搬到同標的日曆價差。</td></tr><tr><td>Slivka 等</td><td>如何重現直接策略與出場規則？</td><td>單一樣本外年份足以證實長期優勢。</td></tr><tr><td>Eisdorfer 等</td><td>是否控制了實際到期日與四／五週差異？</td><td>舊月份效應仍適用所有市場與週期期權。</td></tr></tbody></table></div><details><summary>次級文獻：Jones、Wang（2012）為甚麼不列為核心結論？</summary><p>現有筆記記錄的 The term structure of equity option implied volatility 是初步作者稿，稿件要求勿引用。保留為尋找新版的線索，不用當中醒目的績效數字支持交易。另有一些名為 calendar spread options 的研究，其實研究不同月份期貨價差上的期權，與本頁的兩腿股票／指數期權不同。</p><a href="https://msbfile03.usc.edu/digitalmeasures/christoj/intellcont/jones_wang-1.pdf" target="_blank" rel="noopener">初稿線索 ↗</a></details></section>
+<section id="plan"><div class="eyebrow">From papers to evidence</div><h2>下一步：把想法變成可否決的測試</h2><p>最優先驗證兩件事：相對定價能否預測扣成本的回報？遠腿究竟提供多少回報或風險改善？出場規則與日曆效應作為後續檢查。</p><div class="steps"><div class="step"><strong>核對原文與交易結構</strong><p>取得缺少的全文，確認合約、持有期、訊號方向、成本與回報分母；無法確認的內容保留為未知。</p></div><div class="step"><strong>先重現，再修正</strong><p>把論文結果與重現結果並列。用當時已知的資料、同步兩腿報價與保守成交成本，另做修正版。</p></div><div class="step"><strong>檢查遠腿到底值不值得</strong><p>分別計算近腿、遠腿與整組損益；比較時匹配風險與資金。裸賣近腿僅作研究對照，不能按相同權利金直接比回報。</p></div><div class="step"><strong>凍結規則，用較新資料驗證</strong><p>先定規則，再看未參與調整的資料。記錄失敗、壓力年份與成本增加後的結果，最後才談標的比較與模擬追蹤。</p></div></div><div class="note">目前沒有最佳標的、已驗證勝率或本研究室回測結果。這個網頁完成的是「理解文獻」，沒有自動交易功能。</div></section>
+<section id="quiz" class="quiz"><div class="eyebrow">Check yourself</div><h2>小測驗：你真的明白了嗎？</h2><p>四條問題，答完立即看解釋。</p><div id="quiz-box"></div><p class="score" id="quiz-score"></p><button type="button" id="quiz-reset">重新作答</button></section>
+<section id="terms"><div class="eyebrow">A small glossary</div><h2>讀到這裏，你只需記住這幾個詞</h2><dl class="glossary"><dt>權利金</dt><dd>買入期權所付、賣出期權所收的價格。</dd><dt>行使價</dt><dd>合約約定用來買賣標的的價格；與市場現價是兩個不同概念。</dd><dt>正期望回報</dt><dd>在足夠多次、相同規則的交易下，平均淨損益有望為正；不表示每次都贏。</dd><dt>樣本外</dt><dd>沒有拿來挑規則的資料，好比先寫答案，再打開未看過的試卷。</dd><dt>前視偏差</dt><dd>不小心用未來才知道的資訊，假裝當時已能做決定。</dd><dt>買賣差價與滑價</dt><dd>買價和賣價之間的距離，以及真正成交比預想差的部分；可把紙上利潤吃掉。</dd><dt>回報分母</dt><dd>「賺了幾成」中的本金。用淨權利金或整個帳戶計算，數字可差很遠；必須交代清楚。</dd></dl></section>
+<section id="sources"><div class="eyebrow">Sources & reading depth</div><h2>來源透明，結論才有分寸</h2><p>內容以研究室 2026-11-04 文獻筆記為基礎。本次再次核對兩篇 Cambridge 出版社摘要；其餘閱讀深度沿用既有紀錄，不把未取得全文的研究描述成精讀完成。所有比喻、例子、互動算術與計劃含意均為本頁教學整理。</p><ol class="sources"><li>Campasano、Linn（2017-02-02 工作論文），<em>Understanding and Trading the Term Structure of Volatility</em>。<a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=2871616" target="_blank" rel="noopener">SSRN 2871616</a>；<a href="https://assets.super.so/e46b77e7-ee08-445e-b43f-4ffd88ae0a0e/files/1a39d35f-78ba-4fdd-923f-34966daa5032.pdf" target="_blank" rel="noopener">原筆記 PDF 索引來源</a>。僅既有摘要索引，本次 PDF 回應 403，未核實全文。</li><li>Vasquez（2017），<em>Equity Volatility Term Structures and the Cross Section of Option Returns</em>。JFQA 52(6), 2727–2754。<a href="https://doi.org/10.1017/S002210901700076X" target="_blank" rel="noopener">DOI / 出版社</a>。本次核對摘要與書目，非全文。</li><li>Slivka、Liang、Xue（2020），<em>An Empirical Study of Nifty 50 Option Time Spreads</em>。Indian Journal of Finance 14(8–9), 8–19。<a href="https://indianjournalofentrepreneurship.com/index.php/IJF/article/download/154944/107467/0" target="_blank" rel="noopener">期刊 PDF</a>。既有筆記記錄已讀全文及表 5–9，本次重新取得逾時。</li><li>Eisdorfer、Sadka、Zhdanov（2022；2021 線上），<em>Maturity Driven Mispricing of Options</em>。JFQA 57(2), 514–542。<a href="https://doi.org/10.1017/S002210902100003X" target="_blank" rel="noopener">DOI / 出版社</a>。本次核對摘要與書目，非全文。</li></ol><button type="button" id="print">列印／儲存 PDF</button></section><footer>日曆價差期權研究室 · 文獻教學版<br>研究目的：找出可以驗證的優勢，也容許沒有優勢的結論。</footer></main><script>
+const ids=['far','near','cost'];const inputs=ids.map(id=>document.getElementById(id));const fmt=x=>(x>=0?'+':'−')+Math.abs(x).toFixed(2);function update(){const [f,n,c]=inputs.map(e=>Number(e.value));ids.forEach((id,i)=>document.getElementById(id+'Value').textContent=Number(inputs[i].value).toFixed(2));const net=f-n-2-c;document.getElementById('net').textContent=fmt(net);document.getElementById('breakdown').textContent='遠腿損益 '+fmt(f-5)+' ＋ 近腿損益 '+fmt(3-n)+' − 成本 '+c.toFixed(2)+' ＝ '+fmt(net);document.getElementById('lesson').textContent=net>0?'這組假設報價下，兩腿合計的收益足以支付成本。這只確認此例的算術，不代表入場時能預知結果。':net<0?'這組假設報價下，整組虧損。即使近腿賺錢，遠腿的損失與成本仍可能把收益抵銷。':'這組假設報價下，扣成本剛好打和。';}inputs.forEach(e=>e.addEventListener('input',update));document.getElementById('reset').addEventListener('click',()=>{[4,1,.4].forEach((v,i)=>inputs[i].value=v);update()});document.getElementById('print').addEventListener('click',()=>{const closed=[...document.querySelectorAll('details:not([open])')];closed.forEach(e=>e.open=true);window.addEventListener('afterprint',()=>closed.forEach(e=>e.open=false),{once:true});window.print()});update();
+</script><script>
+document.documentElement.classList.add('js');
+(function(){
+const $=s=>document.querySelector(s);
+const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+function cdf(x){const t=1/(1+0.2316419*Math.abs(x)),d=0.3989423*Math.exp(-x*x/2);const p=d*t*(0.3193815+t*(-0.3565638+t*(1.781478+t*(-1.821256+t*1.330274))));return x>0?1-p:p}
+function call(S,K,T,s,r){r=r==null?0.02:r;if(T<=0)return Math.max(S-K,0);const q=s*Math.sqrt(T),d1=(Math.log(S/K)+(r+s*s/2)*T)/q;return S*cdf(d1)-K*Math.exp(-r*T)*cdf(d1-q)}
+const sc=(a,b,c,d)=>v=>c+(v-a)*(d-c)/(b-a);
+const f2=x=>(x>=0?'+':'−')+Math.abs(x).toFixed(2);
+const cls=x=>Math.abs(x)<0.005?'':x>0?'pos':'neg';
+const poly=(pts)=>pts.map((p,i)=>(i?'L':'M')+p[0].toFixed(1)+' '+p[1].toFixed(1)).join(' ');
+function setOut(id,txt){const e=document.getElementById(id);if(e)e.textContent=txt}
+function setVal(id,x){const e=document.getElementById(id);e.textContent=f2(x);e.className=cls(x)}
+function player(btn,get,set,max,label){let t=null;btn.addEventListener('click',()=>{if(t){clearInterval(t);t=null;btn.textContent='▶ '+label;return}if(get()>=max)set(0);btn.textContent='⏸ 暫停';t=setInterval(()=>{const v=get()+1;set(v);if(v>=max){clearInterval(t);t=null;btn.textContent='▶ '+label}},reduce?30:170)})}
+
+/* ---------- A: payoff hill ---------- */
+(function(){
+const K=100,N0=30,F0=60,IN=.30,IF=.28;
+const debit=call(100,K,F0/365,IF)-call(100,K,N0/365,IN);
+const E={day:$('#a-day'),s:$('#a-s'),ni:$('#a-ni'),fi:$('#a-fi'),svg:$('#a-svg')};
+const L=52,R=620,T=18,B=290;
+const legs=(S,d,dn,df)=>{const n=call(S,K,(N0-d)/365,Math.max(.05,IN+dn/100)),f=call(S,K,(F0-d)/365,Math.max(.05,IF+df/100));return{n,f,nl:call(100,K,N0/365,IN)-n,fl:f-call(100,K,F0/365,IF)}};
+const net=(S,d,dn,df)=>{const g=legs(S,d,dn,df);return g.nl+g.fl};
+function draw(){
+const d=+E.day.value,S=+E.s.value,dn=+E.ni.value,df=+E.fi.value;
+const xs=[];for(let s=80;s<=120.01;s+=.5)xs.push(s);
+const cur=xs.map(s=>net(s,d,dn,df)),ref=xs.map(s=>net(s,30,0,0));
+const all=cur.concat(ref);const ymin=Math.min(-3,Math.floor(Math.min(...all))-1),ymax=Math.max(4,Math.ceil(Math.max(...all))+1);
+const X=sc(80,120,L,R),Y=sc(ymin,ymax,B,T);
+let h='';
+for(let v=Math.ceil(ymin);v<=ymax;v++){h+=`<line x1="${L}" x2="${R}" y1="${Y(v)}" y2="${Y(v)}" stroke="${v===0?'#20382f':'#e3e8dc'}" stroke-width="${v===0?1.4:1}"/><text x="${L-8}" y="${Y(v)+4}" text-anchor="end">${v}</text>`}
+for(let s=80;s<=120;s+=10)h+=`<text x="${X(s)}" y="${B+20}" text-anchor="middle">${s}</text>`;
+h+=`<text x="${(L+R)/2}" y="${B+38}" text-anchor="middle">股價</text><text x="14" y="${(T+B)/2}" transform="rotate(-90 14 ${(T+B)/2})" text-anchor="middle">整組損益</text>`;
+const pts=xs.map((s,i)=>[X(s),Y(cur[i])]);const z=Y(0);
+const area=poly(pts)+` L${X(120)} ${z} L${X(80)} ${z}Z`;
+h+=`<defs><clipPath id="ca"><rect x="${L}" y="${T}" width="${R-L}" height="${Math.max(0,z-T)}"/></clipPath><clipPath id="cb"><rect x="${L}" y="${z}" width="${R-L}" height="${Math.max(0,B-z)}"/></clipPath></defs>`;
+h+=`<path d="${area}" fill="#7fb35a" opacity=".38" clip-path="url(#ca)"/><path d="${area}" fill="#d9644d" opacity=".34" clip-path="url(#cb)"/>`;
+h+=`<path d="${poly(xs.map((s,i)=>[X(s),Y(ref[i])]))}" fill="none" stroke="#9aa79e" stroke-width="1.6" stroke-dasharray="5 4"/><text x="${R-4}" y="${T+26}" text-anchor="end" style="fill:#8b998f">灰虛線：近腿到期當日</text>`;
+h+=`<path d="${poly(pts)}" fill="none" stroke="#20382f" stroke-width="3" stroke-linejoin="round"/>`;
+const v=net(S,d,dn,df);
+h+=`<line x1="${X(S)}" x2="${X(S)}" y1="${T}" y2="${B}" stroke="#b5412f" stroke-dasharray="3 3"/><circle cx="${X(S)}" cy="${Y(v)}" r="7" fill="${v>=0?'#4f9a3a':'#c0462f'}" stroke="#fff" stroke-width="2"/><text x="${X(S)}" y="${Y(v)-13}" text-anchor="middle" style="font-weight:700;fill:#20382f">${f2(v)}</text>`;
+h+=`<line x1="${X(100)}" x2="${X(100)}" y1="${B}" y2="${B+6}" stroke="#20382f"/><text x="${X(100)+4}" y="${T+10}" style="fill:#7d925e">行使價 100</text>`;
+E.svg.innerHTML=h;
+setOut('a-dayv',d);setOut('a-sv',S);setOut('a-niv',(dn>0?'+':'')+dn);setOut('a-fiv',(df>0?'+':'')+df);
+const g=legs(S,d,dn,df);setVal('a-n',g.nl);setVal('a-f',g.fl);setVal('a-t',g.nl+g.fl);setOut('a-d',debit.toFixed(2));
+const dist=Math.abs(S-K);let m;
+if(d===0&&dn===0&&df===0)m='剛入場：還沒有時間流逝，損益接近 0。拉動「過了幾天」看山丘怎樣長出來。';
+else if(v>0.05&&dist<=3)m='甜蜜點：股價貼近行使價，近腿快要失效，遠腿仍有時間價值，整組賺錢。';
+else if(v>0.05)m='仍有盈利，但離山頂已遠。再偏離行使價，利潤會被收窄。';
+else if(v>-0.05)m='約打和：這一點正好是盈虧平衡位置。';
+else if(dist>8)m='股價走遠了：兩腿價值趨近，價差縮窄。最大虧損大約就是入場淨支出——這也是此策略「虧損有限」的原因。';
+else if(df<-3||dn>3)m='波動率變動拖累了損益：遠腿 IV 下跌或近腿 IV 急升，都會傷害整組。這就是「時間值流失」以外的風險。';
+else m='在山丘以外，整組虧損。';
+setOut('a-say',m);
+}
+['day','s','ni','fi'].forEach(k=>E[k].addEventListener('input',draw));
+$('#a-reset').addEventListener('click',()=>{E.day.value=30;E.s.value=100;E.ni.value=0;E.fi.value=0;draw()});
+$('#a-shock1').addEventListener('click',()=>{E.day.value=30;E.s.value=100;E.ni.value=0;E.fi.value=-10;draw()});
+$('#a-shock2').addEventListener('click',()=>{E.day.value=20;E.s.value=100;E.ni.value=15;E.fi.value=0;draw()});
+player($('#a-play'),()=>+E.day.value,v=>{E.day.value=v;draw()},30,'播放時間流逝');
+draw();})();
+
+/* ---------- B: time decay ---------- */
+(function(){
+const svg=$('#b-svg'),sl=$('#b-day'),s=.30;
+const nv=d=>call(100,100,Math.max(0,30-d)/365,s),fv=d=>call(100,100,(60-d)/365,s);
+const L=52,R=620,T=14,B=236,X=sc(0,60,L,R),Y=sc(0,6,B,T);
+function draw(){
+const d=+sl.value;let h='';
+for(let v=0;v<=6;v+=1)h+=`<line x1="${L}" x2="${R}" y1="${Y(v)}" y2="${Y(v)}" stroke="#e3e8dc"/><text x="${L-8}" y="${Y(v)+4}" text-anchor="end">${v}</text>`;
+for(let t=0;t<=60;t+=10)h+=`<text x="${X(t)}" y="${B+18}" text-anchor="middle">${t}</text>`;
+h+=`<text x="${(L+R)/2}" y="${B+36}" text-anchor="middle">入場後第幾天</text>`;
+const ds=[];for(let t=0;t<=30;t+=.5)ds.push(t);
+const nl=ds.map(t=>[X(t),Y(nv(t))]),fl=ds.map(t=>[X(t),Y(fv(t))]);
+h+=`<path d="${poly(fl)} L${poly(nl.slice().reverse()).replace('M','')}Z" fill="#9ccf6c" opacity=".35"/>`;
+h+=`<path d="${poly(ds.map(t=>[X(t),Y(fv(t))]))}" fill="none" stroke="#466b3e" stroke-width="3"/><path d="${poly(nl)}" fill="none" stroke="#b5412f" stroke-width="3"/>`;
+const tail=[];for(let t=30;t<=60;t+=1)tail.push([X(t),Y(fv(t))]);h+=`<path d="${poly(tail)}" fill="none" stroke="#466b3e" stroke-width="2" stroke-dasharray="4 4" opacity=".6"/>`;
+h+=`<text x="${X(3)}" y="${Y(nv(0))-8}" style="fill:#b5412f;font-weight:700">近腿（賣）</text><text x="${X(3)}" y="${Y(fv(0))-8}" style="fill:#466b3e;font-weight:700">遠腿（買）</text>`;
+h+=`<line x1="${X(d)}" x2="${X(d)}" y1="${T}" y2="${B}" stroke="#20382f" stroke-dasharray="3 3"/><circle cx="${X(d)}" cy="${Y(nv(d))}" r="6" fill="#b5412f" stroke="#fff" stroke-width="2"/><circle cx="${X(d)}" cy="${Y(fv(d))}" r="6" fill="#466b3e" stroke="#fff" stroke-width="2"/>`;
+h+=`<text x="${X(30)}" y="${Y(0)-8}" text-anchor="middle" style="fill:#b5412f">近腿到期</text>`;
+svg.innerHTML=h;setOut('b-dayv',d);
+const n=nv(d),f=fv(d);setOut('b-n',n.toFixed(2));setOut('b-f',f.toFixed(2));setOut('b-s',(f-n).toFixed(2));
+const pn=(1-n/nv(0))*100,pf=(1-f/fv(0))*100;setOut('b-pn',pn.toFixed(0)+'%');setOut('b-pf',pf.toFixed(0)+'%');
+setOut('b-say',d===0?'起點：近腿約 3.5，遠腿約 5.0，價差（你付出的組合價值）約 1.5。':d<15?'近腿開始加速下滑，遠腿仍緩慢；兩者之差慢慢擴闊。':d<30?'越接近到期，近腿流失得越快。賣近腿的人，這段時間最有利；但遠腿也在流失，只是慢一些。':'近腿到期歸零。遠腿仍有約 '+f.toFixed(2)+' 的價值（虛線）。注意：這只在股價不動時成立。');
+}
+sl.addEventListener('input',draw);player($('#b-play'),()=>+sl.value,v=>{sl.value=v;draw()},30,'播放');draw();})();
+
+/* ---------- C: term structure ---------- */
+(function(){
+const n=$('#c-n'),f=$('#c-f'),svg=$('#c-svg');
+function draw(){
+const a=+n.value/100,b=+f.value/100;setOut('c-nv',n.value);setOut('c-fv',f.value);
+const L=52,R=620,T=14,B=210,X=sc(0,90,L,R),ymax=Math.max(.8,Math.max(a,b)+.1),Y=sc(0,ymax,B,T);
+let h='';
+for(let v=0;v<=ymax+.001;v+=.2)h+=`<line x1="${L}" x2="${R}" y1="${Y(v)}" y2="${Y(v)}" stroke="#e3e8dc"/><text x="${L-8}" y="${Y(v)+4}" text-anchor="end">${(v*100).toFixed(0)}%</text>`;
+for(let t=0;t<=90;t+=30)h+=`<text x="${X(t)}" y="${B+18}" text-anchor="middle">${t} 天</text>`;
+const slope=(b-a)/30;const iv=t=>Math.max(.05,a+slope*(t-30));
+const pts=[];for(let t=10;t<=90;t+=2)pts.push([X(t),Y(iv(t))]);
+h+=`<path d="${poly(pts)}" fill="none" stroke="#20382f" stroke-width="2" stroke-dasharray="5 4"/><path d="${poly([[X(30),Y(a)],[X(60),Y(b)]])}" fill="none" stroke="#20382f" stroke-width="3.5"/>`;
+h+=`<circle cx="${X(30)}" cy="${Y(a)}" r="8" fill="#b5412f" stroke="#fff" stroke-width="2"/><circle cx="${X(60)}" cy="${Y(b)}" r="8" fill="#466b3e" stroke="#fff" stroke-width="2"/><text x="${X(30)}" y="${Y(a)-14}" text-anchor="middle" style="font-weight:700">近 ${n.value}%</text><text x="${X(60)}" y="${Y(b)-14}" text-anchor="middle" style="font-weight:700">遠 ${f.value}%</text>`;
+const v1=a*a*30/365,v2=b*b*60/365,fw=v2-v1,fvol=fw>0?Math.sqrt(fw/(30/365)):NaN;
+const mx=Math.max(v1,v2,.001),bx=(v,i,c)=>`<rect x="${400+i*0}" y="0" width="0" height="0"/>`;
+svg.innerHTML=h;
+setOut('c-v1',v1.toFixed(4));setOut('c-v2',v2.toFixed(4));setOut('c-fv2',fw.toFixed(4));setOut('c-fw',isNaN(fvol)?'不合理':(fvol*100).toFixed(1)+'%');
+let m;
+if(fw<=0)m='遠期變異出現零或負數：代表這組報價不合理（60 天的總不確定性反而不及 30 天），現實中通常是報價錯誤或數據問題。';
+else if(a>b)m=`近月年化 IV（${n.value}%）高於遠月（${f.value}%），但 60 天的總變異（${v2.toFixed(4)}）仍大於 30 天（${v1.toFixed(4)}）。年化數字高，不等於整段不確定性更大；「近月貴」不能直接當成套利。`;
+else m=`遠月 IV 較高：市場預期之後兩個月（30→60 天）的波動約 ${(fvol*100).toFixed(1)}%。這是由價格推算的「遠期 IV」，不是對未來波幅的保證。`;
+setOut('c-say',m);}
+n.addEventListener('input',draw);f.addEventListener('input',draw);
+document.querySelectorAll('#vizC [data-p]').forEach(b=>b.addEventListener('click',()=>{const[p,q]=b.dataset.p.split(',');n.value=p;f.value=q;draw()}));draw();})();
+
+/* ---------- D: slope ranking ---------- */
+(function(){
+const data=[['甲',-6],['乙',-3],['丙',-1],['丁',0.5],['戊',2],['己',4],['庚',7],['辛',9]];
+const cut=$('#d-cut'),svg=$('#d-svg');
+function draw(){
+const c=+cut.value;setOut('d-cv',c);
+const L=70,R=600,T=16,rowH=30,X=sc(-10,12,L,R);let h='';
+for(let v=-10;v<=12;v+=2)h+=`<line x1="${X(v)}" x2="${X(v)}" y1="${T}" y2="${T+rowH*8}" stroke="${v===0?'#9aa79e':'#eef1e8'}"/><text x="${X(v)}" y="${T+rowH*8+16}" text-anchor="middle">${v}</text>`;
+h+=`<text x="${(L+R)/2}" y="${T+rowH*8+34}" text-anchor="middle">斜率＝遠期 IV − 近期 IV（百分點）</text>`;
+const lo=data.filter(d=>d[1]<c),hi=data.filter(d=>d[1]>=c);
+data.forEach((d,i)=>{const y=T+i*rowH+4,isHi=d[1]>=c;h+=`<text x="${L-12}" y="${y+14}" text-anchor="end" style="font-weight:700">股票${d[0]}</text><rect x="${Math.min(X(0),X(d[1]))}" y="${y}" width="${Math.abs(X(d[1])-X(0))}" height="20" rx="4" fill="${isHi?'#466b3e':'#c98a5b'}"/><text x="${d[1]>=0?X(d[1])+6:X(d[1])-6}" y="${y+15}" text-anchor="${d[1]>=0?'start':'end'}">${d[1]>0?'+':''}${d[1]}</text>`});
+h+=`<line x1="${X(c)}" x2="${X(c)}" y1="${T-8}" y2="${T+rowH*8}" stroke="#b5412f" stroke-width="2.5"/><text x="${X(c)}" y="${T-10}" text-anchor="middle" style="fill:#b5412f;font-weight:700">分界線</text>`;
+svg.innerHTML=h;
+setOut('d-say',lo.length===0||hi.length===0?'分界線太極端：其中一組沒有股票。把線拉回中間。':`低斜率組（橙）${lo.length} 隻、高斜率組（綠）${hi.length} 隻。論文比較的是兩組「之後的期權回報」；發現高斜率組的跨式組合回報較高。但那是跨式、跨股票的證據，我們仍要自己測試同一股票的日曆價差。`);
+}
+cut.addEventListener('input',draw);draw();})();
+
+/* ---------- E: exit rule lab ---------- */
+(function(){
+const svg=$('#e-svg'),tp=$('#e-tp'),bd=$('#e-bd');
+const IN=.30,IF=.28,debit=call(100,100,60/365,IF)-call(100,100,30/365,IN);
+function rng(a){return function(){a|=0;a=a+0x6D2B79F5|0;let t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}}
+function gauss(r){let u=0;while(!u)u=r();return Math.sqrt(-2*Math.log(u))*Math.cos(2*Math.PI*r())}
+function path(seed){const r=rng(seed),S=[100];for(let i=1;i<=30;i++)S.push(S[i-1]*Math.exp(-0.5*.09/365+.30*Math.sqrt(1/365)*gauss(r)));return S}
+function plAt(S,d){return call(S,100,(60-d)/365,IF)-call(S,100,(30-d)/365,IN)-debit}
+function run(S,tpv,bdv){const pls=S.map((s,d)=>plAt(s,d));let ex=29,why='到期前一日離場';for(let d=1;d<=29;d++){if(pls[d]>=tpv*debit){ex=d;why='達到止盈';break}if(Math.abs(S[d]/100-1)>bdv){ex=d;why='股價離行使價太遠';break}}return{pls,ex,why,m:pls[ex],h:pls[30]}}
+let seed=Math.floor(Math.random()*1e6);
+function draw(){
+const tpv=+tp.value/100,bdv=+bd.value/100;setOut('e-tpv',tp.value);setOut('e-bdv',bd.value);
+const S=path(seed),r=run(S,tpv,bdv);
+const L=52,R=620,X=sc(0,30,L,R);
+const sMin=Math.min(...S,100*(1-bdv))-1,sMax=Math.max(...S,100*(1+bdv))+1,Y1=sc(sMin,sMax,175,16);
+const pAll=r.pls.concat([tpv*debit,0]);const pMin=Math.min(...pAll)-.3,pMax=Math.max(...pAll)+.3,Y2=sc(pMin,pMax,380,230);
+let h=`<text x="${L}" y="12" style="font-weight:700">股價路徑</text><text x="${L}" y="222" style="font-weight:700">整組損益（未計成本）</text>`;
+h+=`<rect x="${L}" y="${Y1(100*(1+bdv))}" width="${R-L}" height="${Y1(100*(1-bdv))-Y1(100*(1+bdv))}" fill="#dcefd0" opacity=".6"/><line x1="${L}" x2="${R}" y1="${Y1(100)}" y2="${Y1(100)}" stroke="#7d925e" stroke-dasharray="4 3"/><text x="${R}" y="${Y1(100)-4}" text-anchor="end" style="fill:#7d925e">行使價 100（綠帶＝容許範圍）</text>`;
+h+=`<path d="${poly(S.map((s,d)=>[X(d),Y1(s)]))}" fill="none" stroke="#20382f" stroke-width="2.5"/>`;
+h+=`<line x1="${L}" x2="${R}" y1="${Y2(0)}" y2="${Y2(0)}" stroke="#20382f"/><line x1="${L}" x2="${R}" y1="${Y2(tpv*debit)}" y2="${Y2(tpv*debit)}" stroke="#4f9a3a" stroke-dasharray="4 3"/><text x="${R}" y="${Y2(tpv*debit)-4}" text-anchor="end" style="fill:#4f9a3a">止盈線</text>`;
+h+=`<path d="${poly(r.pls.map((p,d)=>[X(d),Y2(p)]))}" fill="none" stroke="#466b3e" stroke-width="2.5"/>`;
+for(let t=0;t<=30;t+=5)h+=`<text x="${X(t)}" y="395" text-anchor="middle">${t}</text>`;
+h+=`<line x1="${X(r.ex)}" x2="${X(r.ex)}" y1="16" y2="380" stroke="#b5412f" stroke-width="2" stroke-dasharray="5 4"/><circle cx="${X(r.ex)}" cy="${Y2(r.m)}" r="7" fill="#b5412f" stroke="#fff" stroke-width="2"/><text x="${X(r.ex)+6}" y="30" style="fill:#b5412f;font-weight:700">第 ${r.ex} 天離場</text><circle cx="${X(30)}" cy="${Y2(r.h)}" r="7" fill="#20382f" stroke="#fff" stroke-width="2"/><text x="${X(30)-8}" y="${Y2(r.h)-12}" text-anchor="end">放到第 30 天</text>`;
+svg.innerHTML=h;
+setVal('e-m',r.m);setOut('e-r',r.why+'（第 '+r.ex+' 天）');setVal('e-h',r.h);
+setOut('e-say',r.m>r.h+.02?'這一條路徑：提早離場較好。但一條路徑不能說明任何事，可能只是運氣。':r.m<r.h-.02?'這一條路徑：放到近腿到期反而較好——規則令你錯過了後來的利潤。':'這一條路徑：兩種做法結果相若。');
+}
+$('#e-new').addEventListener('click',()=>{seed=Math.floor(Math.random()*1e6);draw()});
+$('#e-batch').addEventListener('click',()=>{const tpv=+tp.value/100,bdv=+bd.value/100;let sm=0,sh=0,w=0,N=300;for(let i=0;i<N;i++){const r=run(path(i+1),tpv,bdv);sm+=r.m;sh+=r.h;if(r.m>r.h+1e-9)w++}
+setOut('e-say',`300 條隨機路徑（沒有任何優勢的模擬世界）：按規則離場平均 ${f2(sm/N)}，放到近腿到期平均 ${f2(sh/N)}；規則較好的路徑佔 ${(w/N*100).toFixed(0)}%。兩者都接近 0（少許差距來自模型取捨）——所以規則是否真有用，要靠真實資料與樣本外驗證，不能靠漂亮的單一例子。`)});
+tp.addEventListener('input',draw);bd.addEventListener('input',draw);draw();})();
+
+/* ---------- F: expiry calendar ---------- */
+(function(){
+const svg=$('#f-svg'),wrap=$('#f-years');let year=2026,sel=null;
+const tf=(y,m)=>{const d=new Date(Date.UTC(y,m,1)),off=(5-d.getUTCDay()+7)%7;return new Date(Date.UTC(y,m,1+off+14))};
+const fmt=d=>`${d.getUTCMonth()+1}月${d.getUTCDate()}日`;
+function draw(){
+wrap.innerHTML='';[2026,2027,2028].forEach(y=>{const b=document.createElement('button');b.type='button';b.textContent=y+' 年';if(y===year)b.className='on';b.onclick=()=>{year=y;sel=null;draw()};wrap.appendChild(b)});
+const rows=[];for(let m=0;m<12;m++){const a=tf(year,m),b=m<11?tf(year,m+1):tf(year+1,0);rows.push({a,b,g:Math.round((b-a)/864e5),m})}
+const L=40,R=620,B=210,T=20,W=(R-L)/12,Y=sc(0,40,B,T);let h='';
+[0,7,14,21,28,35].forEach(v=>h+=`<line x1="${L}" x2="${R}" y1="${Y(v)}" y2="${Y(v)}" stroke="#e3e8dc"/><text x="${L-6}" y="${Y(v)+4}" text-anchor="end">${v}</text>`);
+rows.forEach((r,i)=>{const x=L+i*W+6,w=W-12,c=r.g===35?'#b5412f':'#466b3e';h+=`<g data-i="${i}" style="cursor:pointer"><rect x="${x}" y="${Y(r.g)}" width="${w}" height="${B-Y(r.g)}" rx="5" fill="${c}" opacity="${sel===i?1:.78}" stroke="${sel===i?'#20382f':'none'}" stroke-width="2.5"/><text x="${x+w/2}" y="${Y(r.g)-6}" text-anchor="middle" style="font-weight:700">${r.g}</text><text x="${x+w/2}" y="${B+18}" text-anchor="middle">${r.m+1}月</text></g>`});
+h+=`<text x="${(L+R)/2}" y="${B+40}" text-anchor="middle">該月到期日 → 下個月到期日（相隔天數）</text>`;
+svg.innerHTML=h;
+svg.querySelectorAll('g[data-i]').forEach(g=>g.onclick=()=>{sel=+g.dataset.i;draw()});
+const n5=rows.filter(r=>r.g===35).length,n4=12-n5;
+if(sel==null)setOut('f-say',`${year} 年：${n4} 個「四週」月份、${n5} 個「五週」月份（紅色）。名義上都叫「一個月」，實際長度可相差 7 天（25%）。點選任何一根柱子查看日期。`);
+else{const r=rows[sel];setOut('f-say',`${fmt(r.a)} → ${fmt(r.b)}：相隔 ${r.g} 天（${r.g/7} 週）。若你賣出這一期的近腿，它的實際壽命比「標準一個月」${r.g===35?'長':'短'}。回測若只寫「近月」而不記錄天數，就會把這種差異混在一起。`)}
+}
+draw();})();
+
+/* ---------- quiz ---------- */
+(function(){
+const Q=[
+['近腿到期時，股價剛好停在行使價。最可能發生甚麼事？',['整組一定賺錢','近腿幾乎失效，遠腿仍有時間價值，通常是最有利位置','遠腿同時到期歸零'],1,'這是「山丘頂部」。但「通常有利」不是「一定賺錢」：遠腿的剩餘價值要靠波動率等假設，也要扣成本。'],
+['近月年化 IV 比遠月高，這代表甚麼？',['近月便宜，可以套利','近月年化數字較高，但整段不確定性未必較大，不能直接視為錯價','遠月一定會升'],1,'IV 是年化數字。要比較 30 天與 60 天，應看總變異（IV² × 年數），並留意事件落在哪段期間。'],
+['Slivka 等人的 Nifty 50 研究，2019 年的樣本外結果說明了甚麼？',['策略打敗了大市','規則當年有盈利，但不及持有至到期的對照組，仍不足以證明更好','策略在所有年份都有效'],1,'唯一的時間樣本外年份有賺，但表現不及簡單對照；而且對照組是「持有至到期的日曆價差」，不是買入持有指數。'],
+['為甚麼回測要記錄兩腿的精確到期天數，而不只寫「近月／次近月」？',['因為名稱太長','因為相鄰月份可以相隔 28 或 35 天，實際時間長度不同，結果可能被混在一起','因為這樣數據較多'],1,'Eisdorfer 等人的研究提醒：到期日相隔四週或五週，短期期權的回報有顯著差異。']];
+const box=$('#quiz-box'),sc2=$('#quiz-score');let score=0,done=0;
+function build(){score=0;done=0;sc2.textContent='';box.innerHTML='';Q.forEach((q,qi)=>{const d=document.createElement('div');d.className='q';d.innerHTML=`<b>Q${qi+1}. ${q[0]}</b><div class="opts"></div><div class="fb"></div>`;const o=d.querySelector('.opts');q[1].forEach((t,oi)=>{const b=document.createElement('button');b.type='button';b.textContent=t;b.onclick=()=>{if(d.dataset.done)return;d.dataset.done=1;done++;const ok=oi===q[2];if(ok)score++;b.className=ok?'right':'wrong';o.children[q[2]].classList.add('right');d.querySelector('.fb').textContent=(ok?'✔ 答對！':'✘ 再想想。')+q[3];if(done===Q.length)sc2.textContent=`你答對了 ${score} / ${Q.length} 題`+(score===Q.length?' 🎉':'')};o.appendChild(b)});box.appendChild(d)})}
+$('#quiz-reset').addEventListener('click',build);build();})();
+
+/* ---------- reveal ---------- */
+(function(){document.querySelectorAll('.box,.step,.big-quote').forEach(e=>e.classList.add('reveal'));const els=document.querySelectorAll('.reveal');if(!('IntersectionObserver' in window)){els.forEach(e=>e.classList.add('in'));return}
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.08});els.forEach(e=>io.observe(e));})();
+})();
+</script></body></html>
