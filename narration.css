@@ -1,0 +1,28 @@
+.narr{margin:6px 0 22px}
+.narr-open{display:inline-flex;align-items:center;gap:12px;padding:10px 20px 10px 14px;min-height:48px;border:0;border-radius:999px;background:linear-gradient(135deg,#3b2fb0,#5b45d6);color:#fff;font:inherit;cursor:pointer;text-align:left;box-shadow:0 10px 22px -12px #5b45d6}
+.narr-open:hover{background:linear-gradient(135deg,#4a3dc4,#6d5bd0)}
+.narr-open:focus-visible,.narr button:focus-visible,.narr select:focus-visible,.narr input:focus-visible,.narr summary:focus-visible{outline:3px solid #ffc857;outline-offset:2px}
+.narr-ico{font-size:22px;line-height:1}
+.narr-open b{display:block;font-size:16px;line-height:1.3}
+.narr-open small{display:block;font-size:12.5px;line-height:1.4;opacity:.85}
+.narr-panel{margin-top:12px;padding:16px 18px;border:1px solid #d6d2ef;border-radius:16px;background:linear-gradient(180deg,#fbfaff,#f1eefc);box-shadow:0 14px 30px -20px #2b1f7a66}
+.narr-lang{display:inline-flex;gap:6px;padding:4px;border-radius:999px;background:#e6e2f8;margin-bottom:12px}
+.narr-lang button{min-height:40px;padding:6px 18px;border:0;border-radius:999px;background:transparent;color:#1a1840;font:inherit;font-size:15px;cursor:pointer}
+.narr-lang button.on{background:#1a1840;color:#fff}
+.narr-bar{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.narr-play{flex:none;width:48px;height:48px;border:0;border-radius:50%;background:#ea6a1f;color:#fff;font-size:18px;cursor:pointer;box-shadow:0 8px 16px -8px #ea6a1f}
+.narr-seek{flex:1 1 160px;min-width:120px;accent-color:#5b45d6;height:32px}
+.narr-time{font-size:14px;color:#5b5880;font-variant-numeric:tabular-nums;white-space:nowrap}
+.narr-rate{min-height:40px;border:1px solid #bdb6ec;border-radius:10px;background:#fff;color:#1a1840;font:inherit;font-size:14px;padding:0 8px}
+.narr.playing .narr-open{box-shadow:0 0 0 4px #ffc85766,0 10px 22px -12px #5b45d6}
+.narr-text{margin-top:12px}
+.narr-text summary{cursor:pointer;color:#3b2fb0;font-size:15px;min-height:32px}
+.narr-script{margin-top:8px;padding:12px 16px;border-left:4px solid #5b45d6;background:#fff;border-radius:0 10px 10px 0}
+.narr-script p{margin:0 0 .7em;font-size:16px;line-height:1.9}
+.narr-note{margin:12px 0 0;font-size:12.5px;color:#5b5880;line-height:1.6}
+@media(max-width:560px){.narr-open{width:100%}.narr-bar{gap:10px}.narr-time{order:3}}
+@media(prefers-reduced-motion:reduce){.narr *{transition:none!important}}
+@media print{.narr{display:none}}
+.narr .narr-play:hover{background:#ff8a45;color:#fff}
+.narr .narr-lang button:hover{background:#d6d0f3}
+.narr .narr-lang button.on:hover{background:#1a1840}
