@@ -1,5 +1,5 @@
 (()=>{
-const chapters=[['basics','01','理解原理'],['visual','02','互動圖解'],['papers','03','文獻導讀'],['lab','04','損益試算'],['plan','05','研究路線'],['quiz','06','自我檢查']];
+const chapters=[['basics','01','理解原理'],['visual','02','互動圖解'],['papers','03','文獻導讀'],['lab','04','損益試算'],['new-research','05','新研究'],['iv-signals','06','IV 指標'],['regimes','07','市況結果'],['plan','08','研究路線'],['quiz','09','自我檢查']];
 const rail=document.createElement('aside');rail.className='chapter-rail';rail.setAttribute('aria-label','學習章節');
 chapters.forEach(([id,num,title])=>{const a=document.createElement('a');a.href='#'+id;a.textContent=num;a.title=title;a.setAttribute('aria-label',num+' '+title);rail.append(a)});document.body.append(rail);
 const links=[...document.querySelectorAll('header nav a,.chapter-rail a')];const sections=[...document.querySelectorAll('main section[id]')];const progress=document.querySelector('.reading-progress');let queued=false;
